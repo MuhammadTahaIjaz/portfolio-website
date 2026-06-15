@@ -235,13 +235,64 @@ ul { list-style: none; }
   z-index: 0;
 }
 
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8rem 2.5rem 4rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 800px;
-  padding: 0 2.5rem;
-  margin: 0 auto;
-  padding-top: 8rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.hero__portrait {
+  flex-shrink: 0;
+  width: 320px;
+  height: 320px;
+}
+
+.hero__portrait-ring {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--cyan), var(--green), var(--purple));
+  box-shadow: 0 0 50px rgba(0,212,255,0.25), 0 0 100px rgba(0,255,136,0.1);
+}
+
+.hero__portrait-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  box-shadow: 0 0 80px rgba(0,212,255,0.5), 0 0 160px rgba(0,255,136,0.2);
+  opacity: 0;
+  animation: portraitGlow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes portraitGlow {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: 1; }
+}
+
+.hero__portrait-ring img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg);
+  display: block;
 }
 
 .hero__badge {
@@ -831,12 +882,18 @@ ul { list-style: none; }
   .about__orbit-container { width: 260px; height: 260px; }
   .orbit-dot { transform: rotate(var(--angle)) translateX(120px) rotate(calc(-1 * var(--angle))); }
   .orbit-ring--2 .orbit-dot { transform: rotate(var(--angle)) translateX(88px) rotate(calc(-1 * var(--angle))); }
+  .hero__portrait { width: 260px; height: 260px; }
+  .hero__inner { gap: 2.5rem; }
 }
 
 @media (max-width: 768px) {
   .nav__links, .nav > .btn { display: none; }
   .nav__burger { display: flex; }
-  .hero__content { padding-top: 6rem; }
+  .hero__inner { flex-direction: column-reverse; gap: 2rem; padding-top: 7rem; padding-bottom: 3rem; text-align: center; }
+  .hero__portrait { width: 180px; height: 180px; }
+  .hero__subtitle { max-width: 100%; }
+  .hero__tags { justify-content: center; }
+  .hero__cta { justify-content: center; }
   .skills__grid { grid-template-columns: 1fr; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .project-card { grid-template-columns: 1fr; }
